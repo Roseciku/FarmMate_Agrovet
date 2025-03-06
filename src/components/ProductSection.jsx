@@ -50,7 +50,7 @@ const products = [
     image: VetServices,
     title: " Vet Services",
     description:
-      "rofessional veterinary care to keep your livestock and pets healthy, including checkups, vaccinations, and disease management.",
+      "Professional veterinary care to keep your livestock and pets healthy, including checkups, vaccinations, and disease management.",
   },
 ];
 
@@ -150,6 +150,9 @@ function ProductSection() {
           ))}
         </div>
       </div>
+      <button className=" flex mx-auto mt-5 justify-center items-center text-center font-poppins cursor-pointer px-5 bg-brightYellow w-[200px] h-[30px] text-white text-lg">
+        Shop Now
+      </button>
     </div>
   );
 }

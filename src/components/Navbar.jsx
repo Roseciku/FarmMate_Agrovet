@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -10,13 +10,12 @@ function Navbar() {
         <h1 className='font-bold text-3xl'>FarmMate Agrovet</h1>
         <div >
           <ul className='flex gap-3 list-none font-semibold text-lg'>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contacts</li>
-          <li>Shop</li>
-          <li>SignUp</li>
-          <li>SignIn</li>
-          
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink >About</NavLink></li>
+          <li><NavLink>Contacts</NavLink></li>
+          <li><NavLink to="/products">Shop</NavLink></li>
+          <li><NavLink to="/signup">SignUp</NavLink></li>
+          <li><NavLink to="signin">SignIn</NavLink></li>  
           </ul>
         </div>
 

@@ -10,7 +10,7 @@ function MainPage() {
         <div className='w-full lg:w-1/2 h-[400px]'>
         <img className='w-full h-full object-cover rounded-lg shadow-lg' src={Vegetables} alt="" />
         </div>
-        <div className='w-full lg:w-1/2'>
+      <div className='w-full lg:w-1/2'>
       <h1 className='text-4xl font-bold text-farmGreen mb-5 text-center'>Who We Are</h1>
       <p className='text-gray-700 text-xl leading-relaxed'>
         At <span className="font-bold text-farmGreen">FarmMate Agrovet</span>, we are dedicated to providing  <span className='font-semibold'>high-quality
@@ -25,6 +25,9 @@ function MainPage() {
       </div>
       <ProductSection />
       
+      <div>
+        <h2></h2>
+      </div>
         
     </div>
   )

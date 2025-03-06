@@ -1,16 +1,23 @@
 import React from 'react'
-import HeroSection from './components/HeroSection'
-import MainLayout from './Layout/MainLayout'
-import MainPage from './components/MainPage'
+import{Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom'
+
+
+import HomePage from './pages/HomePage'
+import ProductsPage from './pages/ProductsPage'
 
 function App() {
-  return (
-    <div>
-    <MainLayout />
-    <HeroSection />
-    <MainPage />
-    </div>
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+    <Route  index element={<HomePage />}/>
+    <Route path="/products" element={<ProductsPage />} />
+    </Route>
   )
+)
+
+  return < RouterProvider router={router}/>
+   
 }
 
 export default App
