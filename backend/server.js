@@ -1,0 +1,21 @@
+const express = require('express');
+const db = require('./config/db');
+const dotenv = require('dotenv');
+const routes = require('./routes/route')
+
+dotenv.config();
+const app = express();
+
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
+app.use('/images', express.static('public/images'));
+
+
+app.use('/api', routes)
+
+const PORT = process.env.PORT || 5500;
+
+app.listen(PORT, ()=>{
+    console.log(`Server is running at :http://localhost:${PORT}`);
+})
