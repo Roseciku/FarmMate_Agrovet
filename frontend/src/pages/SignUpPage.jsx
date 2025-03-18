@@ -44,7 +44,7 @@ const onSubmit = (data) => {
       <div className='mb-4'>
       <label htmlFor="password" className='block text-gray-700 font-bold mb-2'>Password</label>
       <input 
-      type="text" 
+      type="password" 
       {...register("password",{
         required: "Password is required",
         minLength:{value:6, message:"Password must be atleast 6 characters"},
