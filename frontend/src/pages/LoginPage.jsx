@@ -12,13 +12,13 @@ const onSubmit = (data) => {
       <form onSubmit={handleSubmit(onSubmit)} className='font-poppins'> 
         <h2 className='text-3xl text-center font-semibold mb-6'>Log In</h2>
         <div className='mb-4'>
-            <label htmlFor="name" className='block text-gray-700 font-bold mb-2'>Username</label>
+            <label htmlFor="email" className='block text-gray-700 font-bold mb-2'>Username</label>
             <input
              type="text"
-            {...register("name",{required:"Name is required" })}
+            {...register("email",{required:"Email is required" })}
              className='border rounded w-full py-2 px-3 mb-2'  
              />
-             {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>}
+             {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
         </div>
         <div className='mb-4'>
             <label htmlFor="password" className='block text-gray-700 font-bold mb-2'>Password</label>
