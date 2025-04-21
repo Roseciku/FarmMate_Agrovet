@@ -7,6 +7,7 @@ function ProductsPage() {
     <div>
       <ProductsNavbar />
       <AllProducts />
+
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {ShoppingCart, ChevronDown, Search, User} from 'lucide-react'
 
+
 function ProductsNavbar() {
 
     const [showCategories, setShowCategories] = React.useState(false)

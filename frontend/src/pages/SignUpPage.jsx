@@ -4,8 +4,34 @@ function SignUpPage() {
 
 const{register, handleSubmit, formState:{errors},} = useForm();
 
-const onSubmit = (data) => {
-    console.log(data);
+const onSubmit = async(data) =>{
+  try {
+    const response = await fetch("http://localhost:5500/api/register",{
+      method: "POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }),
+    });
+
+    const result = await response.json();
+
+    if(response.ok){
+      alert("Registration successful!");
+      window.location.href = "/login"
+    }else{
+      alert("Registration failed: " + result.message)
+    }
+
+    reset()
+  } catch (error) {
+
+    console.error("Error during registration:", error);
+  }
 }
 
   return (

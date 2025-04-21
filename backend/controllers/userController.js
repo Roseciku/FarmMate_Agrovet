@@ -1,5 +1,5 @@
 const db = require ('../config/db');
-const jwt = require("jsonwebtokens");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const {validationResult} = require("express-validator");
 require("dotenv").config();
@@ -64,7 +64,7 @@ console.log("Access token is:", accessToken)
 const refreshToken = jwt.sign(
     {userId: user[0].user_id, email: user[0].email},
     process.env.REFRESH_TOKEN_SECRET,
-    {expires: "1d"}
+    {expiresIn: "1d"}
 );
 
 //Saving refresh token in the database
@@ -77,10 +77,17 @@ console.log("Refresh token saved:", saveTokens);
 res.cookie("jwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
     maxAge: 24 * 60 * 60 * 1000,
 });
-return res.status(200).json({accessToken});
+return res.status(200).json({
+accessToken,
+user: {
+    userId: user[0].user_id,
+    name: user[0].name,
+    email: user[0].email,
+}
+
+});
 
 } catch (error) {
         console.error(error);
@@ -92,8 +99,11 @@ return res.status(200).json({accessToken});
 //Frontend should call this endpoint when the access token expires
 
 exports.refreshToken = async (req, res) => {
-const refreshToken = req.cookies?.jwt; //req.cookies contains all the cookies sent by the clinet and cookies?.jwt checks if there is a jwt cookie.
+
+const refreshToken = req.cookies?.jwt; //req.cookies contains all the cookies sent by the client and cookies?.jwt checks if there is a jwt cookie.
+
 if (!refreshToken) {
+    console.log("Cookies received:", req.cookies);
     return res.status(401).json({ message: "No refresh token found" });
 }
 
@@ -110,11 +120,19 @@ try {
       }
   
       // Verify refresh token
-      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-        if (err) {
-          return res.status(403).json({ message: "Invalid refresh token" });
-        }
-  
+     const decodedData = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+        
+        const [userResult] = await db.execute(
+            "SELECT user_id, name, email FROM users WHERE user_id = ?",
+            [decodedData.userId]
+          );
+        
+          if (userResult.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+          }
+        
+          const user = userResult[0]; // Get user details from the result
+
         // Generate a new access token
         const accessToken = jwt.sign(
           { userId: decoded.userId, email: decoded.email},
@@ -122,8 +140,16 @@ try {
           { expiresIn: "15m" }
         );
   
-        res.json({ accessToken });
-      });
+        res.json({
+        accessToken,
+        user: {
+            userId: user.user_id,
+            name: user.name,
+            email: user.email
+        }
+            
+            });
+    
 } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error refreshing token" });
