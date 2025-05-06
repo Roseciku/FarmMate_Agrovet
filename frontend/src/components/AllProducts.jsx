@@ -13,7 +13,10 @@ function AllProducts() {
 
 
   useEffect(() => {
-    fetchProducts().then((data) => setProducts(data));
+    fetchProducts().then((products) => {
+      setProducts(products);
+})
+   
   }, []);
 
   const toggleDescription = (id) => {
@@ -24,6 +27,7 @@ function AllProducts() {
   };
 
   const handleAddToCart = (product) => {
+
     addToCart(product); // Add product to cart using the addToCart function from context
   }; 
 

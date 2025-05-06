@@ -1,5 +1,5 @@
 import React from 'react'
-import{Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom'
+import{Route, Routes, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom'
 import CartProvider from './apiRequests/CartProvider'
 
 
@@ -12,8 +12,13 @@ import CartPage from './pages/CartPage'
 import Layout from './apiRequests/Layout'
 
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
+
+
+function App() {
+
+
+  return (
+    <Routes>
     <Route element={<Layout />}>
     <Route  index element={<HomePage />}/>
     <Route path="/products" element={<ProductsPage />} />
@@ -21,20 +26,11 @@ const router = createBrowserRouter(
     <Route path="/login" element={<LoginPage />} />
     <Route path="/cart" element={<CartPage />} />
     </Route>
+    </Routes>
   )
-)
-
-function App() {
-
-
-  return (
-
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
 
   
-)
+
    
 }
 
