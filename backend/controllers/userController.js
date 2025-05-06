@@ -7,6 +7,7 @@ require("dotenv").config();
 //register a user
 exports.registerUser = async(req, res)=> {
     const errors = validationResult(req);
+    
     if(!errors.isEmpty()) {
         return res.status(400).json({message:"Please correct input errors", errors: errors.array()});
     }
@@ -54,7 +55,7 @@ exports.loginUser = async (req, res) => {
 //create JWTs
 //access token
 const accessToken = jwt.sign(
-    {userId: user[0].user_id, email: user[0].email},
+    {user_id: user[0].user_id, email: user[0].email},
     process.env.ACCESS_TOKEN_SECRET,
     {expiresIn: "15m"}
 );
@@ -62,7 +63,7 @@ console.log("Access token is:", accessToken)
 
 //refresh token
 const refreshToken = jwt.sign(
-    {userId: user[0].user_id, email: user[0].email},
+    {user_id: user[0].user_id, email: user[0].email},
     process.env.REFRESH_TOKEN_SECRET,
     {expiresIn: "1d"}
 );
@@ -76,13 +77,13 @@ console.log("Refresh token saved:", saveTokens);
 
 res.cookie("jwt", refreshToken, {
     httpOnly: true,
+    secure: true,
     sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,
 });
 return res.status(200).json({
-accessToken,
 user: {
-    userId: user[0].user_id,
+    user_id: user[0].user_id,
     name: user[0].name,
     email: user[0].email,
 }
@@ -124,7 +125,7 @@ try {
         
         const [userResult] = await db.execute(
             "SELECT user_id, name, email FROM users WHERE user_id = ?",
-            [decodedData.userId]
+            [decodedData.user_id]
           );
         
           if (userResult.length === 0) {
@@ -135,7 +136,7 @@ try {
 
         // Generate a new access token
         const accessToken = jwt.sign(
-          { userId: decoded.userId, email: decoded.email},
+          { user_id: decodedData.user_id, email: decodedData.email},
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: "15m" }
         );
@@ -143,7 +144,7 @@ try {
         res.json({
         accessToken,
         user: {
-            userId: user.user_id,
+            user_id: user.user_id,
             name: user.name,
             email: user.email
         }
