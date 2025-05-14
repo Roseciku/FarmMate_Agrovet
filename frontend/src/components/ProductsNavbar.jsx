@@ -1,9 +1,15 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {ShoppingCart, ChevronDown, Search, User} from 'lucide-react'
+import {CartContext} from '../apiRequests/CartProvider'
+import { useContext } from "react";
 
 
-function ProductsNavbar() {
+function ProductsNavbar({setSelectedCategory}) {
+  const { cart } = useContext(CartContext);
+
+// Calculate total quantity (in case items have quantities >1)
+const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
     const [showCategories, setShowCategories] = React.useState(false)
     
@@ -20,7 +26,7 @@ function ProductsNavbar() {
         />
       </div>
         <ul className="flex items-center gap-6 font-semibold text-lg">
-        <li className="hover:text-farmGreen"><NavLink>Home</NavLink></li>
+        <li className="hover:text-farmGreen"><NavLink to="/">Home</NavLink></li>
         <li className="relative">
             <button
             onClick={()=>setShowCategories((prevState)=> !prevState)}
@@ -30,19 +36,23 @@ function ProductsNavbar() {
             </button>
             {showCategories && (
                 <ul className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden">
-                    <li className="px-4 py-2 hover:bg-gray-100">Pesticides </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">Fertilizers </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">Farm Equipment </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">Animal Feeds </li>
+                    <li  onClick={() => setSelectedCategory(null)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">All </li>
+                    <li  onClick={() => setSelectedCategory('Pesticide')} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Pesticides </li>
+                    <li  onClick={() => setSelectedCategory('Fertilizer')}className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Fertilizers </li>
+                    <li  onClick={() => setSelectedCategory('Equipment')}className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Farm Equipment </li>
+                    <li onClick={() => setSelectedCategory('AnimalFeed')}className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Animal Feeds </li>
+                    <li onClick={() => setSelectedCategory('Herbicide')}className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Herbicides </li>
                 </ul>
             )}
         </li>
         <li className="relative"> 
         <NavLink to="/cart" className="flex items-center gap-1 hover:text-farmGreen " >
            <ShoppingCart size={24}/> 
+           {cartItemCount > 0 && (
            <span className="absolute top-[-5px] right-[-8px] bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full ">
-            0
+            {cartItemCount}
             </span> 
+  )}
             </NavLink></li>
 
         <li><NavLink to="/signup" className="hover:text-farmGreen">SignUp</NavLink></li>
