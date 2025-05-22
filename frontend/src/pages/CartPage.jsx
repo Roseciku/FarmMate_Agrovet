@@ -20,7 +20,7 @@ const CartPage = () => {
     <div className="w-full p-6">
       <h2 className="text-3xl font-bold text-center">Shopping Cart</h2>
       <div className="w-full px-4">
-        <div className=" grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full sm:flex-col lg:block md:block ">
+        <div className="grid-cols-3 gap-4 w-full ">
           {cart.map((item) => (
             <div
               key={item?.cart_id}
@@ -57,11 +57,11 @@ const CartPage = () => {
             Total: Ksh{orderTotal.toFixed(2)}
           </h3>
 
-          <button className="bg-green-500 text-white px-4 py-2 rounded-full font-poppins w-[150px]">
+         <NavLink to="/checkout"> <button className="bg-green-500 text-white px-4 py-2 rounded-full font-poppins w-[150px]">
             Checkout
-          </button>
+          </button> </NavLink>
         </div>
-        <NavLink to="/products">Continue Shopping</NavLink>
+        <NavLink to="/products" className="hover:text-farmGreen">Continue Shopping</NavLink>
       </div>
     </div>
   );

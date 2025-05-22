@@ -10,6 +10,7 @@ import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import CartPage from './pages/CartPage'
 import Layout from './apiRequests/Layout'
+import CheckOutPage from './pages/CheckOutPage'
 
 
 
@@ -25,6 +26,7 @@ function App() {
     <Route path="/signup" element={<SignUpPage />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/cart" element={<CartPage />} />
+    <Route path="/checkout" element={<CheckOutPage />} />
     </Route>
     </Routes>
   )
