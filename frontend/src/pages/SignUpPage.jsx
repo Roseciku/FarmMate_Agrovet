@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form'
+const navigate = useNavigate();
 
 function SignUpPage() {
 
