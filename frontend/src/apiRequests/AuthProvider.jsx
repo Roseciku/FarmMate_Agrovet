@@ -9,7 +9,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const refresh = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/refresh`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/refresh`, {
           method: "GET",
           credentials: "include"
         });
@@ -30,7 +30,7 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

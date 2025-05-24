@@ -41,7 +41,7 @@ function AllProducts({selectedCategory}) {
       <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 font-poppins'>
         {filteredProducts.map((product) => (
           <li key={product.product_id} className='border p-4 m-2 flex-1 min-w-[250px] max-w-[300px]'>
-            <img src={`${process.env.REACT_APP_BACKEND_URL}${product.image}`} alt={product.name} className='w-[200px] h-[200px]' />
+            <img src={`${import.meta.env.VITE_BACKEND_URL}${product.image}`} alt={product.name} className='w-[200px] h-[200px]' />
             <h2>{product.name}</h2>
             <p className='font-bold'>Ksh {product.price}</p>
             <p className={`w-full transition-all duration-300 ease-in-out ${expandedDescriptions[product.product_id] ? "whitespace-normal" : "truncate"}`}>

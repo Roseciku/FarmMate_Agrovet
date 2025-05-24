@@ -16,7 +16,7 @@ function ProductsPage() {
 
     const saveProductCart = async (product_id) => {
       const productRes = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/product/${product_id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/product/${product_id}`
       );
 
       if (!productRes.ok) return;
