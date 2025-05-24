@@ -22,7 +22,7 @@ const onSubmit = async(data) =>{
 
     if(response.ok){
       alert("Registration successful!");
-      window.location.href = "/login"
+       navigate("/login");
     }else{
       alert("Registration failed: " + result.message)
     }
