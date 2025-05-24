@@ -28,7 +28,7 @@ const CartPage = () => {
             >
               <div>
                 <img
-                  src={`http://localhost:5500${item?.image}`}
+                  src={`${process.env.REACT_APP_BACKEND_URL}${item?.image}`}
                   alt={item?.name}
                   className="h-20 w-20 mb-2"
                 />

@@ -6,7 +6,7 @@ const{register, handleSubmit, formState:{errors},} = useForm();
 
 const onSubmit = async(data) =>{
   try {
-    const response = await fetch("http://localhost:5500/api/register",{
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/register`,{
       method: "POST",
       headers:{
         "Content-Type":"application/json",

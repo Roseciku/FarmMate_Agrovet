@@ -23,7 +23,7 @@ const CartProvider = ({ children }) => {
     const fetchCart = async () =>  {
       try {
         const response = await fetch(
-          `http://localhost:5500/api/cart/${user.user_id}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/cart/${user.user_id}`
         );
         const data = await response.json();
       setCart(data.cart);
@@ -65,7 +65,7 @@ const CartProvider = ({ children }) => {
     //   return;
     // }
     try {
-      const response = await fetch("http://localhost:5500/api/add", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const CartProvider = ({ children }) => {
 // Update item quantity in cart
 const updateQuantity = async (cart_id, quantity) => {
   try {
-    const response = await fetch(`http://localhost:5500/api/update`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const updateQuantity = async (cart_id, quantity) => {
   const removeFromCart = async (cart_id) => {
     try {
       const response = await fetch(
-        `http://localhost:5500/api/remove/${cart_id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/remove/${cart_id}`,
         {
           method: "DELETE",
         }
