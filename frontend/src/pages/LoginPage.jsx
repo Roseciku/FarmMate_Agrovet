@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form'
 import { AuthContext } from '../apiRequests/AuthProvider';
 import { useContext } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, NavLink } from "react-router-dom";
 
 function LoginPage() {
 
@@ -66,7 +66,7 @@ const onSubmit = async(data) => {
             </button>
       </form>
       <p className="text-sm text-center text-gray-600 mt-4">
-          Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Sign Up</a>
+          Don't have an account? <NavLink to="/signup" className="text-blue-500 hover:underline">Sign Up</NavLink>
         </p>
     </div>
     </div> 

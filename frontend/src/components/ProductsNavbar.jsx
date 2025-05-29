@@ -105,7 +105,12 @@ function ProductsNavbar({ setSelectedCategory }) {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/signin" className="hover:text-farmGreen">
+              <NavLink to="/" className="hover:text-farmGreen">
+                Logout
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/login" className="hover:text-farmGreen">
                 <User size={20} />
               </NavLink>
             </li>
