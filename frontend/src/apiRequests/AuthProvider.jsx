@@ -48,8 +48,31 @@ function AuthProvider({ children }) {
 
   if (loading) return <div>Loading...</div>;
 
+  const logOut = async () =>{
+   
+    try {
+    const response = await fetch("http://localhost:5500/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+
+    if (response.ok || response.status === 204) {
+      setUser(null); // Clear user context
+      localStorage.removeItem("accessToken"); // Optional: remove if you store access tokens
+      alert("Logout successful");
+    } else {
+      alert("Logout failed");
+    }
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("An error occurred during logout");
+  }
+  
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -2,9 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCart, ChevronDown, Search, User, Menu, X } from "lucide-react";
 import { CartContext } from "../apiRequests/CartProvider";
+import { AuthContext } from "../apiRequests/AuthProvider";
 import { useContext, useState } from "react";
 
 function ProductsNavbar({ setSelectedCategory }) {
+  const navigate = useNavigate();
+  const { logOut } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -105,9 +108,17 @@ function ProductsNavbar({ setSelectedCategory }) {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" className="hover:text-farmGreen">
+               <button
+                onClick={ () => {
+                  
+                  logOut(); // Calling the logout function
+                  
+                   navigate("/login"); // Redirect after logout
+                }}
+                className="hover:text-farmGreen"
+              >
                 Logout
-              </NavLink>
+              </button>
             </li>
             <li>
               <NavLink to="/login" className="hover:text-farmGreen">
@@ -237,6 +248,17 @@ function ProductsNavbar({ setSelectedCategory }) {
                   Sign Up
                 </NavLink>
               </li>
+               <button
+                onClick={ () => {
+                  
+                  logOut(); // Calling the logout function
+                  
+                   navigate("/login"); // Redirect after logout
+                }}
+                className="hover:text-farmGreen"
+              >
+                Logout
+              </button>
               <li>
                 <NavLink
                   to="/login"
