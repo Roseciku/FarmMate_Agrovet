@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { NavLink } from "react-router-dom";
 import AnimalFeeds from "../assets/images/AnimalFeeds.jpg";
 import VetServices from "../assets/images/VetServices.jpg";
 import FarmEquipment from "../assets/images/FarmEquipment.jpg";
@@ -151,7 +152,7 @@ function ProductSection() {
         </div>
       </div>
       <button className=" flex mx-auto mt-5 justify-center items-center text-center font-poppins cursor-pointer px-5 bg-brightYellow w-[200px] h-[30px] text-white text-lg">
-        Shop Now
+        <NavLink to= "/products">Shop Now</NavLink>
       </button>
     </div>
   );

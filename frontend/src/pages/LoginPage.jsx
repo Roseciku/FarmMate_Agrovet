@@ -29,7 +29,7 @@ const onSubmit = async(data) => {
       }
 
     } 
-}
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-farmGreen ">
@@ -68,6 +68,6 @@ const onSubmit = async(data) => {
     </div>
     </div> 
   )
-
+}
 
 export default LoginPage

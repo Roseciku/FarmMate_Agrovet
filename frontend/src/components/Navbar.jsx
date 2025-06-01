@@ -27,7 +27,6 @@ function Navbar() {
             <li>
               <NavLink to="/products">Shop</NavLink>
             </li>
-        
           </ul>
         </div>
 
@@ -65,16 +64,6 @@ function Navbar() {
               <li>
                 <NavLink to="/products" onClick={toggleMenu}>
                   Shop
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup" onClick={toggleMenu}>
-                  Sign Up
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/login" onClick={toggleMenu}>
-                  Login
                 </NavLink>
               </li>
             </ul>
