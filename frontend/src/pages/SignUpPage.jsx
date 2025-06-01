@@ -90,7 +90,7 @@ const onSubmit = async(data) =>{
             Sign Up
           </button>
       </form>
-      <p className="text-sm text-center text-gray-600 mt-4">
+      <p className="text-sm text-center text-gray-600 mt-4 ">
           Already have an account? <NavLink to="/login" className="text-blue-500 hover:underline">Log in</NavLink>
         </p>
     </div>

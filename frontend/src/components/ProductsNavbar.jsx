@@ -113,7 +113,7 @@ function ProductsNavbar({ setSelectedCategory }) {
                   
                   logOut(); // Calling the logout function
                   
-                   navigate("/login"); // Redirect after logout
+                   navigate("/"); // Redirect after logout
                 }}
                 className="hover:text-farmGreen"
               >
@@ -253,7 +253,7 @@ function ProductsNavbar({ setSelectedCategory }) {
                   
                   logOut(); // Calling the logout function
                   
-                   navigate("/login"); // Redirect after logout
+                   navigate("/"); // Redirect after logout
                 }}
                 className="hover:text-farmGreen"
               >

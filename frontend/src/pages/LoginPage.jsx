@@ -12,7 +12,7 @@ const navigate = useNavigate();
 
 
 const onSubmit = async(data) => {
-    try {
+  
      const user = await login(data.email, data.password);
 
       const queryParams = new URLSearchParams(location.search);
@@ -23,15 +23,12 @@ const onSubmit = async(data) => {
       if (redirect === "add-to-cart" && product_id && user) {
        
          navigate(`/products?redirect=${redirect}&productId=${product_id}`); // go back to products page
-      } else if (user) {
+      } else {
         
         navigate("/products"); // default after login
       }
 
-
-    } catch (error) {
-      console.error("Login failed:", error.message)
-    }
+    } 
 }
 
   return (
@@ -71,6 +68,6 @@ const onSubmit = async(data) => {
     </div>
     </div> 
   )
-}
+
 
 export default LoginPage
