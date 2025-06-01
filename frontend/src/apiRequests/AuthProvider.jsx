@@ -51,7 +51,7 @@ function AuthProvider({ children }) {
   const logOut = async () =>{
    
     try {
-    const response = await fetch("http://localhost:5500/api/logout", {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/logout`, {
       method: "POST",
       credentials: "include",
     });
