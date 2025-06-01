@@ -13,20 +13,24 @@ const navigate = useNavigate();
 
 const onSubmit = async(data) => {
   
+     try {
      const user = await login(data.email, data.password);
 
-      const queryParams = new URLSearchParams(location.search);
-      const redirect = queryParams.get("redirect");
-      const product_id = queryParams.get("product_id");
+      if (user) {
+      const savedRedirect = localStorage.getItem("redirectAfterLogin");
+      const productToAdd = localStorage.getItem("productToAdd");
 
-
-      if (redirect === "add-to-cart" && product_id && user) {
-       
-         navigate(`/products?redirect=${redirect}&productId=${product_id}`); // go back to products page
-      } else {
-        
-        navigate("/products"); // default after login
+      if (productToAdd) {
+        navigate(savedRedirect || "/products");
       }
+
+     else {
+        navigate("/products");
+      }
+    }
+  } catch (error) {
+    console.error("Login failed:", error.message);
+  }
 
     } 
 

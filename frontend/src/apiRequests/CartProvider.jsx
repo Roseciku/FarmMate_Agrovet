@@ -13,21 +13,29 @@ const CartProvider = ({ children }) => {
   const navigate = useNavigate(); // Initializes navigate so that one is able to redirect users
   const [cart, setCart] = useState([]); //sets up cart as state. This is where you store the current items in the cart
   const [loading, setLoading] = useState(true); // Adds a loading state to track whether the cart is still being fetched from the server
- console.log({user})
- 
+  console.log({ user });
+
   // Fetch cart data from backend when the component mounts
   useEffect(() => {
-    
     if (!user || !user.user_id) return;
 
-    const fetchCart = async () =>  {
+    const fetchCart = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/api/cart/${user.user_id}`
         );
         const data = await response.json();
-      setCart(data.cart);
+        setCart(data.cart);
         console.log("Fetched cart:", data.cart);
+
+        // Check for productToAdd
+        const productToAdd = localStorage.getItem("productToAdd");
+        if (productToAdd) {
+          const parsedProduct = JSON.parse(productToAdd);
+          console.log("Auto-adding product after login:", parsedProduct);
+          await addToCart(parsedProduct);
+          localStorage.removeItem("productToAdd");
+        }
       } catch (error) {
         console.error("Failed to fetch cart:", error);
         setCart([]); // Prevent loading loop
@@ -37,47 +45,45 @@ const CartProvider = ({ children }) => {
     };
 
     fetchCart();
-  }, [user]); 
+  }, [user]);
 
   // Add item to cart
   const addToCart = async (product) => {
-    
     if (!product || !product.product_id) {
       console.error("Invalid product:", product);
       return;
     }
- console.log({user})
+    console.log({ user });
 
     if (!user) {
-      // Redirect to login and include product in query
-      navigate(`/login?redirect=add-to-cart&product_id=${product.product_id}`);
+      // Save the current URL and product to localStorage
+      localStorage.setItem(
+        "redirectAfterLogin",
+        window.location.pathname + window.location.search
+      );
+      localStorage.setItem("productToAdd", JSON.stringify(product));
+
+      navigate("/login");
       return;
     }
 
-    // const existingItem = cart.find(
-    //   (item) => item.product_id === product.product_id
-    // );
-    // console.log(existingItem)
-
-    // if (existingItem) {
-    //   // Optionally, just increase quantity if item already exists
-    //   await updateQuantity(existingItem.cart_id, existingItem.quantity + 1);
-    //   return;
-    // }
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          product_id: product.product_id,
-          quantity: 1,
-        }),
-        credentials: "include",
-      });
-      
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            product_id: product.product_id,
+            quantity: 1,
+          }),
+          credentials: "include",
+        }
+      );
+
       const data = await response.json();
       console.log("Cart after add response:", data.cart);
       // setCart((prevCart) => [...(prevCart || []), data.cart]);
@@ -86,25 +92,28 @@ const CartProvider = ({ children }) => {
       console.error("Failed to add item to cart:", error);
     }
   };
-// Update item quantity in cart
-const updateQuantity = async (cart_id, quantity) => {
-  try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/update`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ cart_id, quantity }),
-    });
-    const data = await response.json();
-    //setCart((prevCart) => [...(prevCart || []), data.cart]);
-     setCart(data.cart); // Update cart after quantity change
-  } catch (error) {
-    console.error("Failed to update quantity:", error);
-  }
-};
+  // Update item quantity in cart
+  const updateQuantity = async (cart_id, quantity) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/update`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cart_id, quantity }),
+        }
+      );
+      const data = await response.json();
+      //setCart((prevCart) => [...(prevCart || []), data.cart]);
+      setCart(data.cart); // Update cart after quantity change
+    } catch (error) {
+      console.error("Failed to update quantity:", error);
+    }
+  };
 
- // Remove item from cart
+  // Remove item from cart
   const removeFromCart = async (cart_id) => {
     try {
       const response = await fetch(
@@ -130,3 +139,13 @@ const updateQuantity = async (cart_id, quantity) => {
 };
 
 export default CartProvider;
+
+/*
+
+What was there before if no user:
+ // Redirect to login and include product in query
+      navigate(`/login?redirect=add-to-cart&product_id=${product.product_id}`);
+      return;
+    }
+
+*/
