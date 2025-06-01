@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { ShoppingCart, ChevronDown, Search, User, Menu, X } from "lucide-react";
 import { CartContext } from "../apiRequests/CartProvider";
 import { AuthContext } from "../apiRequests/AuthProvider";

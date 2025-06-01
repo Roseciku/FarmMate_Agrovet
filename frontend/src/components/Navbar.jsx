@@ -11,10 +11,10 @@ function Navbar() {
 
   return (
     <nav className="flex items-center justify-center bg-farmGreen ">
-      < div className="relative flex justify-between bg-white items-center h-16 mx-auto rounded-full w-[90%] lg:w-[70%] mt-6 mb-6 px-7">
+      < div className="relative flex justify-between bg-white items-center h-16 mx-auto rounded-full w-[90%] lg:w-[80%] mt-6 mb-6 px-7">
         <h1 className="font-bold text-xl md:text-3xl">FarmMate Agrovet</h1>
         <div>
-          <ul className="hidden lg:flex gap-3 list-none font-semibold text-lg">
+          <ul className="hidden lg:flex gap-4 list-none font-semibold text-lg">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -27,12 +27,7 @@ function Navbar() {
             <li>
               <NavLink to="/products">Shop</NavLink>
             </li>
-            <li>
-              <NavLink to="/signup">SignUp</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
+        
           </ul>
         </div>
 
