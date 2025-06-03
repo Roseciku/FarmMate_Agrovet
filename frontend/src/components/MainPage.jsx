@@ -17,7 +17,7 @@ function MainPage() {
           <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-farmGreen mb-5 text-center">
             Who We Are
           </h1>
-          <p className="text-gray-700 text-lg sm:text-xl md:text-xl lg:text-xl leading-relaxed sm:px-4">
+          <p className="text-gray-700 text-md sm:text-xl md:text-xl lg:text-xl leading-relaxed sm:px-4">
             At{" "}
             <span className="font-bold text-farmGreen">FarmMate Agrovet</span>,
             we are dedicated to providing{" "}
@@ -28,7 +28,7 @@ function MainPage() {
             knowledge, and support to maximize productivity and achieve a
             bountiful harvest.
           </p>
-          <p className="text-gray-700 text-lg sm:text-xl md:text-xl lg:text-xl leading-relaxed mt-4">
+          <p className="text-gray-700 text-md sm:text-xl md:text-xl lg:text-xl leading-relaxed sm:px-4">
             With a deep understanding of the agricultural industry, we offer a
             wide range of farm essentials, including premium{" "}
             <span className="font-bold">

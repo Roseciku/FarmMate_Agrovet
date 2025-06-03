@@ -86,6 +86,7 @@ function CheckOutPage() {
           <button className="px-8 py-4 rounded-2xl shadow-lg w-full bg-brightYellow text-white font-bold text-xl">Pay {""}<span>0</span></button>
         </form>
       </div>
+      <p className="text-center "><NavLink to="/cart" className="hover:text-brightYellow underline">Back to Cart</NavLink></p>
     </div>
     </div>
   );

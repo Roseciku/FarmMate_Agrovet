@@ -15,16 +15,33 @@ const CartPage = () => {
   const tax = subtotal * 0.1;
   const orderTotal = subtotal + shippingFee + tax;
 
-  console.log("Cart items:", cart);
+if (cart.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+        <ShoppingCart size={80} className="text-farmGreen mb-4" />
+        <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
+        <p className="text-gray-600 mb-6">
+          You haven’t added any items yet.
+        </p>
+        <NavLink to="/products">
+          <button className="bg-farmGreen text-white px-6 py-3 rounded-full font-semibold hover:bg-brightYellow transition">
+            Shop Now
+          </button>
+        </NavLink>
+      </div>
+    );
+  } 
+
+
   return (
     <div className="w-full p-6">
       <h2 className="text-3xl font-bold text-center">Shopping Cart</h2>
       <div className="w-full px-4">
-        <div className="grid-cols-3 gap-4 w-full ">
+        <div>
           {cart.map((item) => (
             <div
               key={item?.cart_id}
-              className="flex justify-between items-center border p-4 w-full"
+              className="flex flex-col sm:flex-col md:flex-row lg:flex-row justify-between items-center border p-4 w-full"
             >
               <div>
                 <img
@@ -57,11 +74,11 @@ const CartPage = () => {
             Total: Ksh{orderTotal.toFixed(2)}
           </h3>
 
-         <NavLink to="/checkout"> <button className="bg-green-500 text-white px-4 py-2 rounded-full font-poppins w-[150px]">
+         <NavLink to="/checkout"> <button className="bg-green-500 hover:bg-brightYellow text-white px-4 py-2 rounded-full font-poppins w-[150px]">
             Checkout
           </button> </NavLink>
         </div>
-        <NavLink to="/products" className="hover:text-farmGreen">Continue Shopping</NavLink>
+        <NavLink to="/products" className="text-farmGreen hover:text-brightYellow underline">Continue Shopping</NavLink>
       </div>
     </div>
   );
