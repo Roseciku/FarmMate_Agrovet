@@ -1,6 +1,7 @@
 import React from "react";
 import Vegetables from "../assets/images/Vegetables.jpg";
 import ProductSection from "./ProductSection";
+import FooterSection from "./FooterSEction";
 
 function MainPage() {
   return (
@@ -42,7 +43,7 @@ function MainPage() {
         </div>
       </div>
       <ProductSection />
-
+      <FooterSection />
       <div>
         <h2></h2>
       </div>
