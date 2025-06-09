@@ -1,11 +1,16 @@
 import React from "react";
 import Vegetables from "../assets/images/Vegetables.jpg";
 import ProductSection from "./ProductSection";
-import FooterSection from "./FooterSEction";
 
-function MainPage() {
+
+function MainPage({linksRef, isActive}) {
   return (
-    <div className="mt-6 font-poppins">
+    <div 
+    ref={linksRef} 
+    className={`mt-6 font-poppins transition-colors duration-500 ${
+    isActive ? "bg-gray-400 border-2 border-gray-900" : "bg-white"
+  }`}
+    >
       <div className="flex flex-col lg:flex-row items-center gap-8 max-w-6xl mx-auto ">
         <div className="w-full lg:w-1/2 h-[400px]">
           <img
@@ -43,7 +48,7 @@ function MainPage() {
         </div>
       </div>
       <ProductSection />
-      <FooterSection />
+      
       <div>
         <h2></h2>
       </div>

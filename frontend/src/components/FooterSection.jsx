@@ -1,9 +1,14 @@
 import React from 'react'
 
-function FooterSection() {
+function FooterSection({linksRef, isActive}) {
 
   return (
-    <footer className="bg-gray-900 text-white py-8 px-4 font-poppins">
+    <footer
+     ref={linksRef} 
+    className={`bg-gray-900 text-white py-8 px-4 font-poppins transition-colors duration-500 ${
+    isActive ? "bg-gray-600 border-2 border-gray-600" : "bg-gray-900"
+  }`}
+     >
   <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
     
     {/* Company Info */}
@@ -28,9 +33,8 @@ function FooterSection() {
     <div>
       <h2 className="text-xl font-semibold mb-4">Quick Links</h2>
       <ul className="text-sm space-y-2">
-        <li><a href="/products" className="hover:text-yellow-400">Products</a></li>
-        <li><a href="/about" className="hover:text-yellow-400">About Us</a></li>
-        <li><a href="/contact" className="hover:text-yellow-400">Contact</a></li>
+        <li><a href="/products" className="hover:text-brightYellow cursor-pointer">Products</a></li>
+        <li><a href="/products" className="hover:text-brightYellow cursor-pointer">Shop</a></li>    
       </ul>
     </div>
 
