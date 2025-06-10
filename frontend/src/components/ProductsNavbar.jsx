@@ -5,7 +5,7 @@ import { CartContext } from "../apiRequests/CartProvider";
 import { AuthContext } from "../apiRequests/AuthProvider";
 import { useContext, useState } from "react";
 
-function ProductsNavbar({ setSelectedCategory }) {
+function ProductsNavbar({ setSelectedCategory,searchTerm, setSearchTerm }) {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,6 +33,8 @@ function ProductsNavbar({ setSelectedCategory }) {
             type="text"
             placeholder="Search Products ..."
             className="px-2 w-full h-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-farmGreen"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <div>

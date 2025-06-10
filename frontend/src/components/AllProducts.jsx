@@ -4,13 +4,11 @@ import {CartContext} from "../apiRequests/CartProvider";
 import {useContext} from 'react'
 
 
-
-function AllProducts({selectedCategory}) {
+function AllProducts({selectedCategory, searchTerm}) {
   const [products, setProducts] = useState([]);
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
   const {addToCart } = useContext(CartContext) //// Destructure the addToCart function from context
   
-
 
   useEffect(() => {
     fetchProducts().then((products) => {
@@ -31,10 +29,19 @@ function AllProducts({selectedCategory}) {
     addToCart(product); // Add product to cart using the addToCart function from context
   }; 
 
-  //filter logic
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.type?.trim() === selectedCategory)
-    : products;
+//Merging two filters
+const filteredProducts = products.filter((product) => {
+  const matchesCategory = selectedCategory
+    ? product.type?.trim() === selectedCategory
+    : true;
+
+  const matchesSearch = product.name
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+
+  return matchesCategory && matchesSearch;
+});
+
 
   return (
     <div>
