@@ -6,7 +6,7 @@ function FooterSection({linksRef, isActive}) {
     <footer
      ref={linksRef} 
     className={`bg-gray-900 text-white py-8 px-4 font-poppins transition-colors duration-500 ${
-    isActive ? "bg-gray-600 border-2 border-gray-600" : "bg-gray-900"
+    isActive ? "bg-gray-400 border-2 border-gray-400" : "bg-gray-900"
   }`}
      >
   <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
