@@ -1,4 +1,5 @@
 import { CartContext } from "../apiRequests/CartProvider";
+import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
